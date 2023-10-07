@@ -9,6 +9,7 @@ namespace WinTail
     /// </summary>
     class ConsoleReaderActor : UntypedActor
     {
+        public const string StartCommand = "start";
         public const string ExitCommand = "exit";
         private IActorRef _consoleWriterActor;
 
@@ -19,21 +20,28 @@ namespace WinTail
 
         protected override void OnReceive(object message)
         {
-            var read = Console.ReadLine();
-            if (!string.IsNullOrEmpty(read) && String.Equals(read, ExitCommand, StringComparison.OrdinalIgnoreCase))
+            if (message.Equals(StartCommand))
             {
-                // shut down the system (acquire handle to system via
-                // this actors context)
-                Context.System.Terminate();
-                return;
+                DoPrintInstructions();
+            }
+            else if (message is Messages.InputError e)
+            {
+                _consoleWriterActor.Tell(e);
             }
 
-            // send input to the console writer to process and print
-            _consoleWriterActor.Tell(read);
+            GetAndValidateInput();
 
-            // continue reading messages from the console
-            Self.Tell("continue");
+            //https://github.com/petabridge/akka-bootcamp/blob/master/src/Unit-1/lesson2/README.md#update-consolereaderactor
         }
 
+        private void GetAndValidateInput()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DoPrintInstructions()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

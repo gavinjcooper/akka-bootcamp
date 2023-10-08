@@ -5,3 +5,4 @@ Some entries will pass validation, and some won't...
 Type 'exit' to quit this application at any time.
 
 Thank you! Message was valid.
+Invalid: input had odd number of characters.

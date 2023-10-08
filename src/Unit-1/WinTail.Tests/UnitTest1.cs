@@ -1,42 +1,43 @@
 using Microsoft.VisualStudio.TestPlatform.TestHost;
+using System.Collections;
 using System.Text;
 
 namespace WinTail.Tests
 {
-    [UsesVerify]
-    public class UnitTest1 : IConsoleReader
-    {
-        private ManualResetEventSlim handle = new ManualResetEventSlim(false);
-        private string value = "testing";
-        
-        public string ReadLine()
-        {
-            handle.Wait();
-            handle.Reset();
 
-            return value;
+    [UsesVerify]
+    public class UnitTest1 : IAsyncLifetime
+    {
+        private ConsolePrinter outputPrinter;
+        private BlockingCollectionConsoleReader consoleReader;
+        private Task sut;
+
+        public UnitTest1()
+        {
+            outputPrinter = new ConsolePrinter();
+            consoleReader = new BlockingCollectionConsoleReader();
+
+            sut = Task.Run(() => new Application(outputPrinter, consoleReader).Run(new string[] { }));
         }
 
-        private void SetValue(string value)
+        public async Task DisposeAsync()
         {
-            this.value = value;
-            handle.Set();
+            consoleReader.SetValue("exit");
+            await sut;
+        }
+
+        public Task InitializeAsync()
+        {           
+            return Task.CompletedTask;
         }
 
         [Fact]
         public async Task Test1()
         {
-            var outputPrinter = new ConsolePrinter();
-            var sut = new Application(outputPrinter, this);
-
-            var actTask = Task.Run(() => sut.Run(new string[] { }));
-            SetValue("test");
+            consoleReader.SetValue("valid!");
+            consoleReader.SetValue("invalid");
 
             await Task.Delay(1000);
-            SetValue("exit");
-
-            await actTask;
-
             await Verifier.Verify(outputPrinter.ToString());
         }
     }

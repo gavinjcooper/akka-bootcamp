@@ -7,6 +7,6 @@ namespace WinTail
         ConsoleColor ForegroundColor { get; set; }
 
         void ResetColor();
-        void WriteLine(string v);
+        void WriteLine(object v);
     }
 }

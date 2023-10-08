@@ -14,8 +14,8 @@ namespace WinTail
             var builder = new ContainerBuilder();
             builder.RegisterType<Application>();
             return builder.Build();
+            // blocks the main thread from exiting until the actor system is shut down
         }
-
         static void Main(string[] args)  //Main entry point
         {
             CompositionRoot().Resolve<Application>().Run(args);

@@ -9,6 +9,13 @@ namespace WinTail
     /// </summary>
     class ConsoleWriterActor : UntypedActor
     {
+        private IConsoleWriter consoleWriter;
+
+        public ConsoleWriterActor(IConsoleWriter consoleWriter)
+        {
+            this.consoleWriter = consoleWriter;
+        }
+
         protected override void OnReceive(object message)
         {
             var msg = message as string;
@@ -16,9 +23,9 @@ namespace WinTail
             // make sure we got a message
             if (string.IsNullOrEmpty(msg))
             {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("Please provide an input.\n");
-                Console.ResetColor();
+                consoleWriter.ForegroundColor = ConsoleColor.DarkYellow;
+                consoleWriter.WriteLine("Please provide an input.\n");
+                consoleWriter.ResetColor();
                 return;
             }
 

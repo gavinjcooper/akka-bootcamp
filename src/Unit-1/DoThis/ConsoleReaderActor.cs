@@ -12,10 +12,12 @@ namespace WinTail
         public const string StartCommand = "start";
         public const string ExitCommand = "exit";
         private IActorRef _consoleWriterActor;
+        private readonly IConsoleReader consoleReader;
 
-        public ConsoleReaderActor(IActorRef consoleWriterActor)
+        public ConsoleReaderActor(IActorRef consoleWriterActor, IConsoleReader consoleReader)
         {
             _consoleWriterActor = consoleWriterActor;
+            this.consoleReader = consoleReader;
         }
 
         protected override void OnReceive(object message)

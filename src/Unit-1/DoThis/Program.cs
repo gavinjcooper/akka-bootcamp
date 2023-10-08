@@ -1,45 +1,24 @@
-﻿using System;
-using Akka.Actor;
+﻿using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using Autofac;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WinTail
 {
     #region Program
-    class Program
+    [ExcludeFromCodeCoverage]
+    static class Program
     {
-        public static ActorSystem MyActorSystem;
-
-        static void Main(string[] args)
+        private static Autofac.IContainer CompositionRoot()
         {
-            // initialize MyActorSystem
-            MyActorSystem = ActorSystem.Create("MyActorSystem");
-
-            PrintInstructions();
-
-            // time to make your first actors!
-            var consoleWriterActor = MyActorSystem.ActorOf(Props.Create(() => new ConsoleWriterActor()));
-            var consoleReaderActor = MyActorSystem.ActorOf(Props.Create(() => new ConsoleReaderActor(consoleWriterActor)));
-
-            // tell console reader to begin
-            consoleReaderActor.Tell(ConsoleReaderActor.StartCommand);
-
-            // blocks the main thread from exiting until the actor system is shut down
-            MyActorSystem.WhenTerminated.Wait();
+            var builder = new ContainerBuilder();
+            builder.RegisterType<Application>();
+            return builder.Build();
         }
 
-        private static void PrintInstructions()
+        static void Main(string[] args)  //Main entry point
         {
-            Console.WriteLine("Write whatever you want into the console!");
-            Console.Write("Some lines will appear as");
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.Write(" red ");
-            Console.ResetColor();
-            Console.Write(" and others will appear as");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write(" green! ");
-            Console.ResetColor();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("Type 'exit' to quit this application at any time.\n");
+            CompositionRoot().Resolve<Application>().Run(args);
         }
     }
     #endregion

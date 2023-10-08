@@ -188,3 +188,6 @@ FakesAssemblies/
 .ionide
 .idea
 .vs
+
+# Verify
+*.received.*

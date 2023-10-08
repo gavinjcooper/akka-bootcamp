@@ -10,6 +10,8 @@ namespace WinTail
             set => Console.ForegroundColor = value;
         }
 
+        public string ReadLine() => Console.ReadLine();
+
         public void ResetColor() => Console.ResetColor();
 
         public void WriteLine(object value)

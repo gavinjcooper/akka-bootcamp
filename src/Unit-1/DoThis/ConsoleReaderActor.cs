@@ -14,11 +14,13 @@ namespace WinTail
         public const string ExitCommand = "exit";
         private IActorRef _consoleWriterActor;
         private readonly IConsoleReader consoleReader;
+        private readonly IConsoleWriter consoleWriter;
 
-        public ConsoleReaderActor(IActorRef consoleWriterActor, IConsoleReader consoleReader)
+        public ConsoleReaderActor(IActorRef consoleWriterActor, IConsoleReader consoleReader, IConsoleWriter consoleWriter)
         {
             _consoleWriterActor = consoleWriterActor;
             this.consoleReader = consoleReader;
+            this.consoleWriter = consoleWriter;
         }
 
         protected override void OnReceive(object message)
@@ -35,13 +37,12 @@ namespace WinTail
             GetAndValidateInput();
         }
 
-        // in ConsoleReaderActor, after OnReceive()
         #region Internal methods
         private void DoPrintInstructions()
         {
-            Console.WriteLine("Write whatever you want into the console!");
-            Console.WriteLine("Some entries will pass validation, and some won't...\n\n");
-            Console.WriteLine("Type 'exit' to quit this application at any time.\n");
+            consoleWriter.WriteLine("Write whatever you want into the console!");
+            consoleWriter.WriteLine("Some entries will pass validation, and some won't...\n\n");
+            consoleWriter.WriteLine("Type 'exit' to quit this application at any time.\n");
         }
 
         /// <summary>
@@ -50,7 +51,7 @@ namespace WinTail
         /// </summary>
         private void GetAndValidateInput()
         {
-            var message = Console.ReadLine();
+            var message = consoleReader.ReadLine();
             if (string.IsNullOrEmpty(message))
             {
                 // signal that the user needs to supply an input, as previously

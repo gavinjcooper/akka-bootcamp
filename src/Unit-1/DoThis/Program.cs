@@ -13,6 +13,7 @@ namespace WinTail
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<Application>();
+            builder.RegisterType<SystemConsole>().As<IConsoleReader>().As<IConsoleWriter>();
             return builder.Build();
             // blocks the main thread from exiting until the actor system is shut down
         }

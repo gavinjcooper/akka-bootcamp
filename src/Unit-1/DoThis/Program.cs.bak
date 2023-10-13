@@ -8,7 +8,7 @@ namespace WinTail
 
         static void Main(string[] args)
         {
-            // make actor system 
+            // initialize MyActorSystem
             MyActorSystem = ActorSystem.Create("MyActorSystem");
 
             // time to make your first actors!

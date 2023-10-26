@@ -28,49 +28,72 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             sysChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            button1 = new System.Windows.Forms.Button();
+            btnDisk = new System.Windows.Forms.Button();
+            btnMemory = new System.Windows.Forms.Button();
+            btnCpu = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)sysChart).BeginInit();
             SuspendLayout();
             // 
             // sysChart
             // 
-            chartArea2.Name = "ChartArea1";
-            sysChart.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            sysChart.ChartAreas.Add(chartArea1);
             sysChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            sysChart.Legends.Add(legend2);
+            legend1.Name = "Legend1";
+            sysChart.Legends.Add(legend1);
             sysChart.Location = new System.Drawing.Point(0, 0);
             sysChart.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             sysChart.Name = "sysChart";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            sysChart.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            sysChart.Series.Add(series1);
             sysChart.Size = new System.Drawing.Size(1440, 1098);
             sysChart.TabIndex = 0;
             sysChart.Text = "sysChart";
-            sysChart.Click += sysChart_Click;
             // 
-            // button1
+            // btnDisk
             // 
-            button1.Location = new System.Drawing.Point(1235, 946);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(150, 46);
-            button1.TabIndex = 1;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnDisk.Location = new System.Drawing.Point(1188, 946);
+            btnDisk.Name = "btnDisk";
+            btnDisk.Size = new System.Drawing.Size(197, 46);
+            btnDisk.TabIndex = 1;
+            btnDisk.Text = "DISK (OFF)";
+            btnDisk.UseVisualStyleBackColor = true;
+            btnDisk.Click += btnDisk_Click;
+            // 
+            // btnMemory
+            // 
+            btnMemory.Location = new System.Drawing.Point(1188, 894);
+            btnMemory.Name = "btnMemory";
+            btnMemory.Size = new System.Drawing.Size(197, 46);
+            btnMemory.TabIndex = 2;
+            btnMemory.Text = "MEMORY (OFF)";
+            btnMemory.UseVisualStyleBackColor = true;
+            btnMemory.Click += btnMemory_Click;
+            // 
+            // btnCpu
+            // 
+            btnCpu.Location = new System.Drawing.Point(1188, 842);
+            btnCpu.Name = "btnCpu";
+            btnCpu.Size = new System.Drawing.Size(197, 46);
+            btnCpu.TabIndex = 3;
+            btnCpu.Text = "CPU (ON)";
+            btnCpu.UseVisualStyleBackColor = true;
+            btnCpu.Click += btnCpu_Click;
             // 
             // Main
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1440, 1098);
-            Controls.Add(button1);
+            Controls.Add(btnCpu);
+            Controls.Add(btnMemory);
+            Controls.Add(btnDisk);
             Controls.Add(sysChart);
             Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             Name = "Main";
@@ -84,7 +107,9 @@
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart sysChart;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnDisk;
+        private System.Windows.Forms.Button btnMemory;
+        private System.Windows.Forms.Button btnCpu;
     }
 }
 

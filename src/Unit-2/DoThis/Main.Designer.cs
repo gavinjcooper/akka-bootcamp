@@ -35,6 +35,7 @@
             btnDisk = new System.Windows.Forms.Button();
             btnMemory = new System.Windows.Forms.Button();
             btnCpu = new System.Windows.Forms.Button();
+            btnPauseResume = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)sysChart).BeginInit();
             SuspendLayout();
             // 
@@ -46,21 +47,23 @@
             legend1.Name = "Legend1";
             sysChart.Legends.Add(legend1);
             sysChart.Location = new System.Drawing.Point(0, 0);
-            sysChart.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            sysChart.Margin = new System.Windows.Forms.Padding(4);
             sysChart.Name = "sysChart";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             sysChart.Series.Add(series1);
-            sysChart.Size = new System.Drawing.Size(1440, 1098);
+            sysChart.Size = new System.Drawing.Size(874, 686);
             sysChart.TabIndex = 0;
             sysChart.Text = "sysChart";
             // 
             // btnDisk
             // 
-            btnDisk.Location = new System.Drawing.Point(1188, 946);
+            btnDisk.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnDisk.Location = new System.Drawing.Point(731, 570);
+            btnDisk.Margin = new System.Windows.Forms.Padding(2);
             btnDisk.Name = "btnDisk";
-            btnDisk.Size = new System.Drawing.Size(197, 46);
+            btnDisk.Size = new System.Drawing.Size(121, 50);
             btnDisk.TabIndex = 1;
             btnDisk.Text = "DISK (OFF)";
             btnDisk.UseVisualStyleBackColor = true;
@@ -68,9 +71,11 @@
             // 
             // btnMemory
             // 
-            btnMemory.Location = new System.Drawing.Point(1188, 894);
+            btnMemory.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnMemory.Location = new System.Drawing.Point(731, 516);
+            btnMemory.Margin = new System.Windows.Forms.Padding(2);
             btnMemory.Name = "btnMemory";
-            btnMemory.Size = new System.Drawing.Size(197, 46);
+            btnMemory.Size = new System.Drawing.Size(121, 50);
             btnMemory.TabIndex = 2;
             btnMemory.Text = "MEMORY (OFF)";
             btnMemory.UseVisualStyleBackColor = true;
@@ -78,24 +83,38 @@
             // 
             // btnCpu
             // 
-            btnCpu.Location = new System.Drawing.Point(1188, 842);
+            btnCpu.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnCpu.Location = new System.Drawing.Point(731, 462);
+            btnCpu.Margin = new System.Windows.Forms.Padding(2);
             btnCpu.Name = "btnCpu";
-            btnCpu.Size = new System.Drawing.Size(197, 46);
+            btnCpu.Size = new System.Drawing.Size(121, 50);
             btnCpu.TabIndex = 3;
             btnCpu.Text = "CPU (ON)";
             btnCpu.UseVisualStyleBackColor = true;
             btnCpu.Click += btnCpu_Click;
             // 
+            // btnPauseResume
+            // 
+            btnPauseResume.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+            btnPauseResume.Location = new System.Drawing.Point(731, 354);
+            btnPauseResume.Name = "btnPauseResume";
+            btnPauseResume.Size = new System.Drawing.Size(121, 50);
+            btnPauseResume.TabIndex = 4;
+            btnPauseResume.Text = "PAUSE ||";
+            btnPauseResume.UseVisualStyleBackColor = true;
+            btnPauseResume.Click += btnPauseResume_Click;
+            // 
             // Main
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1440, 1098);
+            ClientSize = new System.Drawing.Size(874, 686);
+            Controls.Add(btnPauseResume);
             Controls.Add(btnCpu);
             Controls.Add(btnMemory);
             Controls.Add(btnDisk);
             Controls.Add(sysChart);
-            Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            Margin = new System.Windows.Forms.Padding(4);
             Name = "Main";
             Text = "System Metrics";
             FormClosing += Main_FormClosing;
@@ -110,6 +129,7 @@
         private System.Windows.Forms.Button btnDisk;
         private System.Windows.Forms.Button btnMemory;
         private System.Windows.Forms.Button btnCpu;
+        private System.Windows.Forms.Button btnPauseResume;
     }
 }
 

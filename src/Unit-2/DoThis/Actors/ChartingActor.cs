@@ -7,7 +7,7 @@ using Akka.Actor;
 
 namespace ChartApp.Actors;
 
-public class ChartingActor : ReceiveActor
+public class ChartingActor : ReceiveActor, IWithUnboundedStash
 {
     /// <summary>
     /// Maximum number of points we will allow in a series
@@ -93,11 +93,17 @@ public class ChartingActor : ReceiveActor
 
     private void Paused()
     {
+        Receive<AddSeries>(addSeries => Stash.Stash());
+        Receive<RemoveSeries>(removeSeries => Stash.Stash());
         Receive<Metric>(HandleMetricsPaused);
         Receive<TogglePause>(pause =>
         {
             SetPauseButtonText(false);
             UnbecomeStacked();
+
+            // ChartingActor is leaving the Paused state, put messages back
+            // into mailbox for processing under new behavior
+            Stash.UnstashAll();
         });
     }
 
@@ -208,4 +214,6 @@ public class ChartingActor : ReceiveActor
     {
         _pauseButton.Text = string.Format("{0}", !paused ? "PAUSE ||" : "RESUME ->");
     }
+
+    public IStash Stash { get; set; }
 }
